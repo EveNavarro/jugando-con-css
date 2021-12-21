@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%,#090a0f 100%);
+    overflow: hidden;
+}
+
+.tree {
+    position: absolute;
+    top: 100px;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(30deg);
+    animation: animate 6s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotateX(-20deg) rotateY(360deg);
+    }
+    100% {
+        transform: rotateX(-20deg) rotateY(0deg);
+    }
+}
+
+.tree::before {
+    content: '⭐';
+    position: absolute;
+    top: -120px;
+    left: calc(50% - 45px);
+    font-size: 4em;
+}
+
+.tree div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: translateY(calc(100px * var(--j)));
+}
+
+.tree div.top span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #1f6d1f, #40c240);
+    clip-path: polygon(50% 0%,0% 100%,100% 100%);
+    transform-origin: bottom;
+    border-bottom: 10px solid #00000019;
+    transform: rotateY(calc(90deg * var(--i))) rotateX(30deg) translateZ(173px);
+}
+
+.tree div.bottom span {
+    position: absolute;
+    top: 350px;
+    left: calc(50% - 30px);
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(90deg, #692713, #582b04);
+    /* clip-path: polygon(50% 0%,0% 100%,100% 100%); */
+    transform-origin: bottom;
+    border-bottom: 10px solid #00000055;
+    transform: rotateY(calc(90deg * var(--i))) translateZ(30px);
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    background: #0002;
+    transform-style: preserve-3d;
+    transform: rotateX(90deg) translateZ(-500px);
+    filter: blur(20px);
+}
+
+/* STARS */
+
+.glowing {
+    position: relative;
+    min-width: 750px;
+    height: 750px;
+    margin: -150px;
+    transform-origin: right;
+    animation: colorChange 5s linear infinite;
+}
+
+.glowing:nth-child(even) {
+    transform-origin: left;
+}
+
+@keyframes colorChange {
+    0% {
+        filter: hue-rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.glowing span {
+    position: absolute;
+    top: calc(80px * var(--i));
+    left: calc(80px * var(--i));
+    bottom: calc(80px * var(--i));
+    right: calc(80px * var(--i));
+}
+
+.glowing span:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    border-left-style: -8px;
+    width: 15px;
+    height: 15px;
+    background: #f00;
+    border-radius: 50%;
+}
+
+.glowing span:nth-child(3n + 1):before {
+    background: rgba(134,255,0,1);
+    box-shadow: 0 0 20px rgba(134,255,0,1),
+                0 0 40px rgba(134,255,0,1),
+                0 0 60px rgba(134,255,0,1),
+                0 0 80px rgba(134,255,0,1),
+                0 0 0 8px rgba(134,255,0,.1);
+}
+
+.glowing span:nth-child(3n + 2):before {
+    background: rgba(255,214,0,1);
+    box-shadow: 0 0 20px rgba(255,214,0,1),
+                0 0 40px rgba(255,214,0,1),
+                0 0 60px rgba(255,214,0,1),
+                0 0 80px rgba(255,214,0,1),
+                0 0 0 8px rgba(255,214,0,.1);
+}
+
+.glowing span:nth-child(3n + 3):before {
+    background: rgba(0,226,255,1);
+    box-shadow: 0 0 20px rgba(0,226,255,1),
+                0 0 40px rgba(0,226,255,1),
+                0 0 60px rgba(0,226,255,1),
+                0 0 80px rgba(0,226,255,1),
+                0 0 0 8px rgba(0,226,255,.1);
+}
+
+.glowing span:nth-child(3n + 1) {
+    animation: particles 10s alternate infinite;
+}
+@keyframes particles {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.glowing span:nth-child(3n + 2) {
+    animation: particles-reverse 3s alternate infinite;
+}
+@keyframes particles-reverse {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.glowing span:nth-child(3n + 3) {
+    animation: particles-reverse 8s alternate infinite;
+}
